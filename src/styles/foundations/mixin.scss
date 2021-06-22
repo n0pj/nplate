@@ -1,0 +1,33 @@
+//
+// @import '../../foundations/mixin.scss';
+//  p-miw-md
+// project-min-width-medium
+//
+
+$breakpoints: (
+  'p-m-mobile-header-break': '(max-width: 371.98px)',
+  'xs': '(max-width: 575.98px)',
+  'large-xs': '(max-width: 601.98px)',
+  'lsm': '(max-width: 701.98px)',
+  'sm': '(max-width: 767.98px)',
+  'project-sm': '(max-width: 801.98px)',
+  'md': '(max-width: 991.98px)',
+  'project-md': '(max-width: 1101.98px)',
+  'p-miw-md': '(min-width: 1102px)',
+  'lg': '(max-width: 1199.98px)',
+  'xl': '(min-width: 1200px)',
+  'm-header-break': '(max-width: 1031.98px)',
+  'miw-header-break': '(min-width: 1032px)',
+) !default;
+
+@mixin mqd($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+@mixin mqu($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "sourceMap": false,
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

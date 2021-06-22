@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "extends": "eslint:recommended",
+  "rules": {
+    "indent": [2, 2],
+    // "linebreak-style": [2, "unix"],
+    "semi": ["off", "never", { "beforeStatementContinuationChars": "never" }],
+    "semi-spacing": ["error", { "after": true, "before": false }],
+    "semi-style": ["off", "first"],
+    "no-extra-semi": "error",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error",
+    "no-unused-vars": "off",
+    "no-undef": "off"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "parser": "babel-eslint"
+}

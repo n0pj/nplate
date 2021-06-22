@@ -1,0 +1,9 @@
+---
+extends: stylelint-config-sugarss-recommended
+plugins:
+  - stylelint-order
+ignoreFiles:
+  - node_modules/**/*.css
+  - src/lib/**/*.css
+rules:
+  - order/properties-alphabetical-order: true
