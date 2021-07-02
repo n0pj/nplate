@@ -112,6 +112,10 @@ const MainServer = cb => {
     `${resourceDirectory}/${esDirectory}/**/*.js`,
     series(Script, browserSync.reload)
   )
+  watch(
+    `${resourceDirectory}/${esDirectory}/**/*.jsx`,
+    series(Script, browserSync.reload)
+  )
   watch(`${buildDirectorySrc}/**/*`).on('change', browserSync.reload)
   if (useLaravel) {
     watch(
