@@ -1,19 +1,31 @@
-
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-<script defer src="src/scripts/index.js"></script>
-<script defer src="src/scripts/react.js"></script>
-<script defer src="src/scripts/vendors.js"></script>
-<script defer src="src/scripts/react_tsx.js"></script>
-<link rel="stylesheet" href="src/styles/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+
+  <script defer src="/src/scripts/main.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
 </head>
 
 <body>
-test
-<div id="app"></div>
-<div id="root"></div>
-<canvas id="myCanvas"></canvas>
+  <p class="test">index.html</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">test</div>
+      <div class="col-6">
+        <img src="https://wired.jp/wp-content/uploads/2018/01/GettyImages-522585140.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+  <script></script>
 </body>
+
+</html>
+
 <?php
 // include 'src/vendors/BladeOne-3.37/lib/BladeOne.php';
 // $blade = new \eftec\bladeone\BladeOne(__DIR__, __DIR__.'/compiles', \eftec\bladeone\BladeOne::MODE_DEBUG);
