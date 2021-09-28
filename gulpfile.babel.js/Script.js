@@ -76,7 +76,7 @@ const Script = async cb => {
     return esbuild
       .build({
         define: { 'process.env.NODE_ENV': mode },
-        target: 'es6',
+        target: 'node14',
         entryPoints: files,
         bundle: true,
         outdir: `${buildDirectorySrc}/scripts`,
