@@ -214,6 +214,10 @@ yarn
 
 # Usage
 
+```
+git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.git
+```
+
 最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
 
 - ディレクトリ構成
