@@ -5,11 +5,11 @@ const resourceDirectory = `${Config['resource_directory']}`
 const esDirectory = `${Config['ecmascript_settings']['ecmascript_directory']}`
 // const {VueLoaderPlugin} = require('vue-loader')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-
 const entry = require('webpack-glob-entry')
+const mode = process.env.NODE_ENV
 
 module.exports = {
-  mode: 'development',
+  mode,
   plugins: [new VueLoaderPlugin()],
   entry: entry(
     `${resourceDirectory}/${esDirectory}/*.js`,

@@ -3,7 +3,7 @@ export default {
   resource_directory: 'src',
   server_settings: {
     // php を xampp, mamp 等を使用せずに nplate のみで動かす場合は、host, port を設定する
-    host: 'localhost:80', // wordpress の場合、localhost のみ
+    host: 'localhost', // wordpress の場合、localhost のみ
     // php を使用する場合、port が php サーバーになり、host には localhost + port を合うように入力する
     port: 80,
     browsersync_port: 4000,
@@ -22,8 +22,8 @@ export default {
       vue: false,
       ts: false,
       tsx: false,
-      minify: false,
-      compiler: false,
+      minify: true,
+      compiler: true,
       esbuild: true // webpack の代わりとして実行される、react 系であれば瀑速で build される
       // vue 非対応
     }
