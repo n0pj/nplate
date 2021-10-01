@@ -1,5 +1,7 @@
+export const fs = require('fs')
+
 import Config from './Config'
-import { useScriptMinify } from './gulpfile.babel.js/Constants'
+
 const buildDirectorySrc = `${Config['template_name']}/src`
 const resourceDirectory = `${Config['resource_directory']}`
 const esDirectory = `${Config['ecmascript_settings']['ecmascript_directory']}`
@@ -10,7 +12,10 @@ const entry = require('webpack-glob-entry')
 
 module.exports = {
   mode: 'development',
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    // new hardSourceWebpackPlugin(),
+    new VueLoaderPlugin()
+  ],
   entry: entry(
     `${resourceDirectory}/${esDirectory}/*.js`,
     `${resourceDirectory}/${esDirectory}/*.jsx`,
@@ -33,12 +38,16 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader']
+        use: {
+          loader: 'ts-loader'
+        }
       },
       {
         test: /\.tsx$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader']
+        use: {
+          loader: 'ts-loader'
+        }
       },
       {
         test: /\.vue$/,
@@ -64,7 +73,9 @@ module.exports = {
       {
         test: /\.jsx$/,
         exclude: /node_modules/,
-        use: ['eslint-loader', 'babel-loader']
+        use: {
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.css$/,
@@ -101,6 +112,7 @@ module.exports = {
       name: 'vendors',
       chunks: 'initial'
     },
-    minimize: useScriptMinify
-  }
+    minimize: true
+  },
+  target: 'node'
 }

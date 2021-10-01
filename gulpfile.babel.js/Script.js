@@ -26,6 +26,7 @@ import {
 } from './Constants'
 
 const sass = require('sass')
+const envFilePlugin = require('esbuild-envfile-plugin')
 
 const sassPlugin = options => ({
   name: 'esbuild-plugin-sass',
@@ -82,7 +83,8 @@ const Script = async cb => {
         outdir: `${buildDirectorySrc}/scripts`,
         minify: !isDev,
         sourcemap: isDev,
-        plugins: [sassPlugin()]
+        target: 'node',
+        plugins: [sassPlugin(), envFilePlugin]
       })
       .catch(e => {
         console.log(e)
