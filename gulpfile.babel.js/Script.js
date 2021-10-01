@@ -48,8 +48,7 @@ const Script = async cb => {
   if (useNext) {
     return cb()
   }
-  let mode = process.argv[3]
-  mode = mode.replace(/--mode=/g, '')
+  const mode = process.env.NODE_ENV
   webpackConfig.mode = mode
 
   if (useCompiler && !useESBuild) {
@@ -66,7 +65,7 @@ const Script = async cb => {
   }
 
   if (useCompiler && useESBuild) {
-    const rawMode = mode.replace(/"/g, '')
+    const rawMode = process.env.NODE_ENV
     const isDev = rawMode == 'development'
 
     const files = await glob(
