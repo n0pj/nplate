@@ -1,5 +1,5 @@
 import Config from './Config'
-import { useScriptMinify } from './gulpfile.babel.js/Constants'
+import { useScriptMinify } from './gulp.tasks/Constants'
 const buildDirectorySrc = `${Config['template_name']}/src`
 const resourceDirectory = `${Config['resource_directory']}`
 const esDirectory = `${Config['ecmascript_settings']['ecmascript_directory']}`
