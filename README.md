@@ -215,10 +215,32 @@ yarn
 # Usage
 
 ```
-git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.git
+git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.git && cd project_name
 ```
 
 最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
+
+## Config.js 設定例
+
+### Next.js 設定例
+
+```js
+{
+  server_settings: {
+    host: 'localhost:3003',
+    browsersync_port: 4000,
+    proxy_port: 3003, // next.js の設定
+    use: {
+      proxy: true,
+    }
+  },
+  ecmascript_settings: {
+    use: {
+      next: true,
+    }
+  },
+}
+```
 
 - ディレクトリ構成
 
