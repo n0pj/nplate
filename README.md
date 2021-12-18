@@ -3,6 +3,145 @@
 この nplate は n0pj が汎用的かつシンプルに、HTML と CSS のみの静的なサイト、PHP や ECMAScript を使用した動的なサイトを作成するために作ったテンプレートである。
 prettier の仕様を推奨する。
 
+"description": "This template(nplate) is very simple and generally, versatilely, HTML and CSS only static site development, PHP and ECMAScript used to dynamic site can development.",
+
+# Features
+
+使用技術&使用できる技術
+
+- ECMAScript, JavaScript, HTML, Sass, CSS, PHP, gulp, webpack...
+- React, Vue.js, Next.js に対応
+- webpack 5.4.0 を使用し、ES をコンパイル・トランスパイル
+- esbuild に対応し、js, jsx, ts, tsx を高速にコンパイル
+- Sass では、全探索コンパイル、Importer を使用したコンパイルのどちらかを選択できる。Importer を使用したコンパイルが推奨で、この方式ではキャッシュを利用しており、コンパイルが高速
+- EJS が使用できる
+- CSS を縮小し、ベンダープレフィックスを自動で付加する。標準で stylelint が入っている
+- コンパイルされた ES を超縮小化、gulp ではなく webpack 使用
+- HTML を縮小
+- 自動で公開用のプロジェクトを作成 ( Default public/ )
+- 標準で HTML サーバーを搭載、PHP をインストールしていれば、PHP も使用可
+- ソースの更新があればオートリロード
+- Bootstrap5 (必要に応じて削除、追加すること)
+
+# Requirement
+
+- Yarn 1.17.3
+- node 10.16.3 ( 14.17.0 でも 動作確認 )
+- npm 6.9.0
+  ※これは n0pj の開発環境であり、これ以外でも動作する可能性がある。動かない場合は、Yarn, node, npm のバージョンを確認。
+
+# Installation
+
+nplate 内で node_modules のインストール
+
+```bash
+yarn
+```
+
+# Usage
+
+```
+git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.git && cd project_name
+```
+
+最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
+
+## Config.js 設定例
+
+### Next.js 設定例
+
+```js
+{
+  server_settings: {
+    host: 'localhost:3003',
+    browsersync_port: 4000,
+    proxy_port: 3003, // next.js の設定
+    use: {
+      proxy: true,
+    }
+  },
+  ecmascript_settings: {
+    use: {
+      next: true,
+    }
+  },
+}
+```
+
+- ディレクトリ構成
+
+使用するディレクトリは以下のようになっている。
+
+src 以下を開発ディレクトリとする。
+
+```bash
+nplate
+├─ build ( build 先 )
+└┬ src
+ ├── images
+ ├── scripts
+ ├── setup_files ( Laravel, WordPress 用に nplate を変換するためのファイル群)
+ ├── styles
+ ├── vendors ( font awesome 等を入れる場合に使用 )
+ ├─┬ views ( HTML, PHP 等を入れる場所 )
+ │ └── partials //header, footer, content等に分ける場合に使うディレクトリ、削除してもよい
+ └─┬ styles //FLOCSSを参照 https://github.com/hiloki/flocss
+   ├── foundations
+   ├── layouts
+   ├─┬ objects
+   │ ├── components
+   │ ├── projects
+   │ └── utilities
+   └─ main.css ( Importer の役割であり、エントリーポイントでもある )
+.
+.
+.
+```
+
+- コマンド
+
+ビルドと共にサーバーを立ち上げる。
+
+```bash
+yarn start
+```
+
+本番用にビルドを行う。( 試験的 )
+
+```bash
+yarn build
+```
+
+キャッシュによるエラーが出た場合に実行するコード。
+
+```bash
+yarn delete-cache
+```
+
+- jQuery
+
+```bash
+import $ from 'jquery'
+// or
+const $ = require('jquery')
+```
+
+こうすることで、\$()の構文を使うことができる。
+
+- Bootstrap4
+
+Bootstrap4 は標準で搭載しており、ビルド時にも一緒にビルドされるようになっている。無効にするには、src/styles/foundations/custom-bootstrap-importer.scss を削除またはコメントアウトする。Bootstrap の JS を無効にするには、src/scripts/bootstrap.js を削除またはコメントアウトする。
+
+# Author
+
+- 作成者: n0pj
+- 問い合わせ: admin@n0pj.com, https://n0pj.com/contactus/
+
+# License
+
+MIT
+
+
 また、この nplate を使用する限りでなく、HTML, CSS, PHP, ECMAScript でプログラミングをする場合は、以下のコーディング規約、設計方法などを参照し、可能な限り命名等は守ること。
 
 - HTML & CSS Style Guide
@@ -171,146 +310,6 @@ $bool = true;
 <?= $bool ? 1 : 2 ?>
 ```
 
+
 || ユーザーファーストも大事だが、開発者ファーストも大事 ||
 
-"description": "This template(nplate) is very simple and generally, versatilely, HTML and CSS only static site development, PHP and ECMAScript used to dynamic site can development.",
-
-# Features
-
-使用技術&使用できる技術
-
-- ECMAScript, javascript, HTML, Sass, CSS, PHP, gulp, webpack...
-- React, Vue.js, Next.js に対応
-- webpack 5.4.0 を使用し、ES をコンパイル・トランスパイル
-- ES はファイルによるキャッシュにより、コンパイル・トランスパイルが高速
-- ES のモジュール化が可能
-- esbuild に対応し、js, jsx, ts, tsx を高速にコンパイル
-- Sass では、全探索コンパイル、Importer を使用したコンパイルのどちらかを選択できる。Importer を使用したコンパイルが推奨で、この方式ではキャッシュを利用しており、コンパイルが高速
-- EJS が使用できる
-- Composer を使用することなく、Laravel に搭載されている BladeOne テンプレートエンジンを搭載（WordPress でも使用可）※1
-- CSS を縮小し、ベンダープレフィックスを自動で付加する。標準で stylelint が入っている
-- コンパイルされた ES を超縮小化、gulp ではなく webpack 使用
-- HTML を縮小
-- 自動で公開用のプロジェクトを作成
-- 標準で HTML サーバーを搭載、PHP をインストールしていれば、PHP も使用可
-- ソースの更新があればオートリロード
-- Bootstrap4 (必要に応じて削除、追加すること)
-
-# Requirement
-
-- Yarn 1.17.3
-- node 10.16.3
-- npm 6.9.0
-- PHP7(必須ではないが、導入したほうが開発がより便利になる)
-  ※これは n0pj の開発環境であり、これ以外でも動作する可能性がある。動かない場合は、Yarn, node, npm のバージョンを確認。
-
-# Installation
-
-nplate 内で node_modules のインストール
-
-```bash
-yarn
-```
-
-# Usage
-
-```
-git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.git && cd project_name
-```
-
-最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
-
-## Config.js 設定例
-
-### Next.js 設定例
-
-```js
-{
-  server_settings: {
-    host: 'localhost:3003',
-    browsersync_port: 4000,
-    proxy_port: 3003, // next.js の設定
-    use: {
-      proxy: true,
-    }
-  },
-  ecmascript_settings: {
-    use: {
-      next: true,
-    }
-  },
-}
-```
-
-- ディレクトリ構成
-
-使用するディレクトリは以下のようになっている。
-
-src 以下を開発ディレクトリとする。
-
-```bash
-nplate
-├─ build ( build 先 )
-└┬ src
- ├── images
- ├── scripts
- ├── setup_files ( Laravel, WordPress 用に nplate を変換するためのファイル群)
- ├── styles
- ├── vendors ( font awesome 等を入れる場合に使用 )
- ├─┬ views ( HTML, PHP 等を入れる場所 )
- │ └── partials //header, footer, content等に分ける場合に使うディレクトリ、削除してもよい
- └─┬ styles //FLOCSSを参照 https://github.com/hiloki/flocss
-   ├── foundations
-   ├── layouts
-   ├─┬ objects
-   │ ├── components
-   │ ├── projects
-   │ └── utilities
-   └─ main.css ( Importer の役割であり、エントリーポイントでもある )
-.
-.
-.
-```
-
-- コマンド
-
-ビルドと共にサーバーを立ち上げる。
-
-```bash
-yarn start
-```
-
-本番用にビルドを行う。( 試験的 )
-
-```bash
-yarn build
-```
-
-キャッシュによるエラーが出た場合に実行するコード。
-
-```bash
-yarn delete-cache
-```
-
-- jQuery
-
-```bash
-import $ from 'jquery'
-// or
-const $ = require('jquery')
-```
-
-こうすることで、\$()の構文を使うことができる。
-
-- Bootstrap4
-
-Bootstrap4 は標準で搭載しており、ビルド時にも一緒にビルドされるようになっている。無効にするには、src/styles/foundations/custom-bootstrap-importer.scss を削除またはコメントアウトする。Bootstrap の JS を無効にするには、src/scripts/bootstrap.js を削除またはコメントアウトする。
-
-# Author
-
-- 作成者: n0pj
-- 問い合わせ: admin@n0pj.com, https://n0pj.com/contactus/
-
-# License
-
-MIT
