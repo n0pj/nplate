@@ -29,14 +29,6 @@
 - npm 6.9.0
   ※これは n0pj の開発環境であり、これ以外でも動作する可能性がある。動かない場合は、Yarn, node, npm のバージョンを確認。
 
-# Installation
-
-nplate 内で node_modules のインストール
-
-```bash
-yarn
-```
-
 # Usage
 
 ```
@@ -44,6 +36,26 @@ git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.gi
 ```
 
 最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
+
+nplate 内で node_modules のインストール
+
+```bash
+yarn
+```
+
+- コマンド
+
+ビルドと共にサーバーを立ち上げる。
+
+```bash
+yarn start
+```
+
+本番用にビルドを行う。
+
+```bash
+yarn build
+```
 
 ## Config.js 設定例
 
@@ -95,26 +107,6 @@ nplate
 .
 .
 .
-```
-
-- コマンド
-
-ビルドと共にサーバーを立ち上げる。
-
-```bash
-yarn start
-```
-
-本番用にビルドを行う。( 試験的 )
-
-```bash
-yarn build
-```
-
-キャッシュによるエラーが出た場合に実行するコード。
-
-```bash
-yarn delete-cache
 ```
 
 - jQuery
