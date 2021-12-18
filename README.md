@@ -1,7 +1,6 @@
 # nplate
 
 この nplate は n0pj が汎用的かつシンプルに、HTML と CSS のみの静的なサイト、PHP や ECMAScript を使用した動的なサイトを作成するために作ったテンプレートである。
-prettier の仕様を推奨する。
 
 "description": "This template(nplate) is very simple and generally, versatilely, HTML and CSS only static site development, PHP and ECMAScript used to dynamic site can development.",
 
