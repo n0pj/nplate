@@ -32,7 +32,7 @@
 # Usage
 
 ```
-git clone git@github.com:n0pj/nplate.git project_name && rm -rf project_name/.git && cd project_name
+git clone git@github.com:n0pj/nplate.git project-name && rm -rf project-name/.git && cd project-name
 ```
 
 最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
