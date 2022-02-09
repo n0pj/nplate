@@ -33,7 +33,7 @@
 
 ```
 git clone git@github.com:n0pj/nplate.git project-name && rm -rf project-name/.git && cd project-name
-cp Config.js.example Config.js
+cp Config.example.js Config.js
 ```
 
 最初に、nplate ルートにある Config.js にそれぞれの環境に応じた設定をする必要がある。
