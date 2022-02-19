@@ -102,9 +102,9 @@
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development yarn gulp StartServer",
-    "watch": "NODE_ENV=development yarn gulp StartWatch",
-    "build": "NODE_ENV=production yarn gulp StartBuild",
+    "start": "NODE_ENV=\\\"development\\\" yarn gulp StartServer",
+    "watch": "NODE_ENV=\\\"development\\\" yarn gulp StartWatch",
+    "build": "NODE_ENV=\\\"production\\\" yarn gulp StartBuild",
     "setup": "node setup",
     "next:dev": "next dev",
     "next:build": "next build",
