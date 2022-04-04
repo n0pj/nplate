@@ -9,7 +9,7 @@ import {
 } from './Constants'
 
 const Image = cb => {
-  return src(`${resourceDirectory}/images/**/*.{png,jpg,gif,svg,ico}`)
+  return src(`${resourceDirectory}/images/**/*.{png,jpg,gif,svg,ico,webp}`)
     .pipe(
       imagemin([
         pngquant({
