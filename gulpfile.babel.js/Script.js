@@ -1,11 +1,7 @@
 import {
   src,
-  webpack,
-  webpackStream,
-  webpackConfig,
   dest,
   gulpBabel,
-  sourcemaps,
   concat,
   rename,
   uglify,
@@ -22,47 +18,33 @@ import {
   esbuild,
   entry,
   glob,
-  useESBuild
+  useESBuild,
 } from './Constants'
 
 const sass = require('sass')
 
-const sassPlugin = options => ({
+const sassPlugin = (options) => ({
   name: 'esbuild-plugin-sass',
   setup(build) {
     build.onLoad({ filter: /\.s[ac]ss$/ }, ({ path }) => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         sass.render({ ...options, file: path }, (err, result) => {
           resolve({
             contents: result?.css,
             loader: 'css',
-            errors: err ? [{ text: err.message }] : undefined
+            errors: err ? [{ text: err.message }] : undefined,
           })
         })
       })
     })
-  }
+  },
 })
 
-const Script = async cb => {
+const Script = async (cb) => {
   if (useNext) {
     return cb()
   }
   const mode = process.env.NODE_ENV
-  webpackConfig.mode = mode
-
-  if (useCompiler && !useESBuild) {
-    webpackStream(webpackConfig, webpack)
-      .pipe(sourcemaps.init())
-      // .pipe(concat('main'))
-      // .pipe(gulpBabel({
-      //   presets: ['@babel/preset-env']
-      // }))
-      // .pipe(uglify())
-      // .pipe(rename({extname: '.js'}))
-      // .pipe(sourcemaps.write('.'))
-      .pipe(dest(`${buildDirectorySrc}/scripts`))
-  }
 
   if (useCompiler && useESBuild) {
     const rawMode = process.env.NODE_ENV
@@ -81,9 +63,9 @@ const Script = async cb => {
         outdir: `${buildDirectorySrc}/scripts`,
         minify: !isDev,
         sourcemap: isDev,
-        plugins: [sassPlugin()]
+        plugins: [sassPlugin()],
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e)
         // process.exit(1)
       })

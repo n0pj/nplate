@@ -2,8 +2,6 @@ import {
   gulpConnectPhp,
   browserSync,
   series,
-  watch,
-  serverPort,
   resourceDirectory,
   buildDirectory,
   buildDirectorySrc,
@@ -18,7 +16,6 @@ import {
   useVue,
   useReact,
   useNext,
-  useReactTsx,
   useTs,
   useTsx,
   useProxy,
@@ -28,7 +25,7 @@ import {
   open,
   useLaravel,
   useWordpress,
-  useAudio
+  useAudio,
 } from './Constants'
 import Vendor from './Vendor'
 import Image from './Image'
@@ -38,8 +35,9 @@ import EJS from './EJS'
 import PHP from './PHP'
 import HTML from './HTML'
 import Audio from './Audio'
+import gulp from 'gulp'
 
-const MainServer = cb => {
+const MainServer = (cb) => {
   if (useNext) {
     const next = require('next')
     const dev = process.env.NODE_ENV !== 'production'
@@ -55,16 +53,17 @@ const MainServer = cb => {
           return handle(request, result)
         })
 
-        server.listen(proxyPort, error => {
+        server.listen(proxyPort, (error) => {
           if (error) throw error
           console.log(
-            `> Server setup complete ${process.env.CLIENT_URL ||
-              `http://localhost:${browsersyncPort}`}`
+            `> Server setup complete ${
+              process.env.CLIENT_URL || `http://localhost:${browsersyncPort}`
+            }`
           )
           open(`http://localhost:${browsersyncPort}`)
         })
       })
-      .catch(ex => {
+      .catch((ex) => {
         console.error(ex.stack)
         process.exit(1)
       })
@@ -75,11 +74,11 @@ const MainServer = cb => {
         port: 80,
         base: `${buildDirectory}/`,
         bin: phpBin,
-        ini: phpIni
+        ini: phpIni,
       },
       () => {
         browserSync({
-          proxy: host
+          proxy: host,
         })
       }
     )
@@ -87,9 +86,9 @@ const MainServer = cb => {
     let serverSettings = {
       port: browsersyncPort,
       server: {
-        baseDir: `${buildDirectory}/`
+        baseDir: `${buildDirectory}/`,
       },
-      open: false
+      open: false,
     }
 
     if (!useNext) {
@@ -103,79 +102,85 @@ const MainServer = cb => {
     browserSync(serverSettings)
   }
 
-  watch(`${resourceDirectory}/images/**/*`, series(Image, browserSync.reload))
-  watch(
+  gulp.watch(
+    `${resourceDirectory}/images/**/*`,
+    series(Image, browserSync.reload)
+  )
+  gulp.watch(
     `${resourceDirectory}/${styleDirectory}/**/*.scss`,
     series(Style, browserSync.reload)
   )
-  watch(
+  gulp.watch(
     `${resourceDirectory}/${esDirectory}/**/*.js`,
     series(Script, browserSync.reload)
   )
-  watch(
+  gulp.watch(
     `${resourceDirectory}/${esDirectory}/**/*.jsx`,
     series(Script, browserSync.reload)
   )
-  watch(`${buildDirectorySrc}/**/*`).on('change', browserSync.reload)
+  gulp.watch(`${buildDirectorySrc}/**/*`).on('change', browserSync.reload)
   if (useLaravel) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.php`,
       series(PHP, browserSync.reload)
     )
   } else if (usePhp) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.php`,
       series(PHP, browserSync.reload)
     )
   } else if (useWordpress) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.php`,
       series(PHP, browserSync.reload)
     )
   } else {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.html`,
       series(HTML, browserSync.reload)
     )
   }
   if (useEjs) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.ejs`,
       series(EJS, browserSync.reload)
     )
   }
   if (useVue) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.vue`,
       series(Script, browserSync.reload)
     )
   }
   if (useTs) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.ts`,
       series(Script, browserSync.reload)
     )
   }
   if (useReact) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.jsx`,
       series(Script, browserSync.reload)
     )
   }
   if (useTsx) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.tsx`,
       series(Script, browserSync.reload)
     )
   }
   if (useVendor) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/vendors/**/*`,
       series(Vendor, browserSync.reload)
     )
   }
   if (useAudio) {
-    watch(`${resourceDirectory}/audios/**/*`, series(Audio, browserSync.reload))
+    gulp.watch(
+      `${resourceDirectory}/audios/**/*`,
+      series(Audio, browserSync.reload)
+    )
   }
   cb()
 }

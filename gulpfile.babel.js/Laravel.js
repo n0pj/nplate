@@ -1,11 +1,8 @@
 import {
   src,
   dest,
-  webpackConfig,
   uglify,
   rename,
-  webpackStream,
-  webpack,
   plumber,
   notify,
   concat,

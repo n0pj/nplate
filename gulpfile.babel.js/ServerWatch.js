@@ -2,7 +2,6 @@ import {
   gulpConnectPhp,
   browserSync,
   series,
-  watch,
   serverPort,
   resourceDirectory,
   buildDirectory,
@@ -28,7 +27,7 @@ import {
   open,
   useLaravel,
   useWordpress,
-  useAudio
+  useAudio,
 } from './Constants'
 import Vendor from './Vendor'
 import Image from './Image'
@@ -38,8 +37,9 @@ import EJS from './EJS'
 import PHP from './PHP'
 import HTML from './HTML'
 import Audio from './Audio'
+import gulp from 'gulp'
 
-const MainServer = cb => {
+const MainServer = (cb) => {
   if (useNext) {
     const next = require('next')
     const dev = process.env.NODE_ENV !== 'production'
@@ -55,93 +55,97 @@ const MainServer = cb => {
           return handle(request, result)
         })
 
-        server.listen(proxyPort, error => {
+        server.listen(proxyPort, (error) => {
           if (error) throw error
           console.log(
-            `> Server setup complete ${process.env.CLIENT_URL ||
-              `http://localhost:${browsersyncPort}`}`
+            `> Server setup complete ${
+              process.env.CLIENT_URL || `http://localhost:${browsersyncPort}`
+            }`
           )
           open(`http://localhost:${browsersyncPort}`)
         })
       })
-      .catch(ex => {
+      .catch((ex) => {
         console.error(ex.stack)
         process.exit(1)
       })
   }
 
-  watch(
+  gulp.watch(
     `${resourceDirectory}/images/**/*`,
     series(Image, () => {})
   )
-  watch(
+  gulp.watch(
     `${resourceDirectory}/${styleDirectory}/**/*.scss`,
     series(Style, () => {})
   )
-  watch(
+  gulp.watch(
     `${resourceDirectory}/${esDirectory}/**/*.js`,
     series(Script, () => {})
   )
-  watch(`${buildDirectorySrc}/**/*`).on('change', () => {})
+  gulp.watch(`${buildDirectorySrc}/**/*`).on('change', () => {})
   if (useLaravel) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.php`,
       series(PHP, () => {})
     )
   } else if (usePhp) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.php`,
       series(PHP, () => {})
     )
   } else if (useWordpress) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.php`,
       series(PHP, () => {})
     )
   } else {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.html`,
       series(HTML, () => {})
     )
   }
   if (useEjs) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/views/**/*.ejs`,
       series(EJS, () => {})
     )
   }
   if (useVue) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.vue`,
       series(Script, () => {})
     )
   }
   if (useTs) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.ts`,
       series(Script, () => {})
     )
   }
   if (useReact) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.jsx`,
       series(Script, () => {})
     )
   }
   if (useTsx) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/${esDirectory}/**/*.tsx`,
       series(Script, () => {})
     )
   }
   if (useVendor) {
-    watch(
+    gulp.watch(
       `${resourceDirectory}/vendors/**/*`,
       series(Vendor, () => {})
     )
   }
   if (useAudio) {
-    watch(`${resourceDirectory}/audios/**/*`, series(Audio, browserSync.reload))
+    gulp.watch(
+      `${resourceDirectory}/audios/**/*`,
+      series(Audio, browserSync.reload)
+    )
   }
   cb()
 }
